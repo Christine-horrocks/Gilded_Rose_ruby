@@ -21,6 +21,18 @@ describe GildedRose do
       expect(items[0].quality).to eq(6)
     end
 
+    it 'increments quality of average item -2 after sell_in date' do
+      items = [Item.new("bread", 0, 7 )]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq(5)
+    end
+
+    it 'quality of average item doesnt go negative' do
+      items = [Item.new("bread", 0, 1 )]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq(0)
+    end
+
     it 'increments sell_in of Aged Brie -1' do
       items = [Item.new("Aged Brie", 5, 6 )]
       GildedRose.new(items).update_quality()
@@ -31,6 +43,12 @@ describe GildedRose do
       items = [Item.new("Aged Brie", 5, 6 )]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq(7)
+    end
+
+    it 'increments quality of Aged Brie dosent go over 50' do
+      items = [Item.new("Aged Brie", 5, 50 )]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq(50)
     end
 
     it 'increments sell_in of Backstage passes -1' do
