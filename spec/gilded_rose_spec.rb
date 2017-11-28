@@ -39,19 +39,19 @@ describe GildedRose do
       expect(items[0].sell_in).to eq(4)
     end
 
-    it 'increments quality of Backstage passes with >10 sell_in +1' do
+    it 'increments quality of Backstage passes with < 10 sell_in +1' do
       items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 11, 6 )]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq(7)
     end
 
-    it 'increments quality of Backstage passes with 10-6 sell_in +1' do
+    it 'increments quality of Backstage passes with 10-6 sell_in +2' do
       items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 8, 6 )]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq(8)
     end
 
-    it 'increments quality of Backstage passes with 5-1 sell_in +1' do
+    it 'increments quality of Backstage passes with 5-1 sell_in +3' do
       items = [Item.new("Backstage passes to a TAFKAL80ETC concert", 4, 6 )]
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq(9)
