@@ -98,7 +98,23 @@ describe GildedRose do
       GildedRose.new(items).update_quality()
       expect(items[0].quality).to eq(7)
     end
+    it 'increments sell_in of conjured item -1' do
+      items = [Item.new("Conjured bread", 5, 6 )]
+      GildedRose.new(items).update_quality()
+      expect(items[0].sell_in).to eq(4)
+    end
 
+    it 'increments quality of conjured item -2' do
+      items = [Item.new("Conjured bread", 5, 5 )]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq(3)
+    end
+
+    it 'increments quality of conjured item -4 after sell_in date' do
+      items = [Item.new("Conjured bread", 0, 7 )]
+      GildedRose.new(items).update_quality()
+      expect(items[0].quality).to eq(3)
+    end
   end
 
 end

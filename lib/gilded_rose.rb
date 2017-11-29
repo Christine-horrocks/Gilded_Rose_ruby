@@ -12,67 +12,23 @@ class GildedRose
         update_sulfuras(item)
       elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         update_backstage_pass(item)
+      elsif item.name.downcase.include? "conjured"
+        update_conjured(item)
       else
         update_average_item(item)
       end
     end
   end
 
-    #   if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-    #     if item.quality > 0
-    #       if item.name != "Sulfuras, Hand of Ragnaros"
-    #         item.quality = item.quality - 1
-    #       end
-    #     end
-    #   else
-    #     if item.quality < 50
-    #       item.quality = item.quality + 1
-    #       if item.name == "Backstage passes to a TAFKAL80ETC concert"
-    #         if item.sell_in < 11
-    #           if item.quality < 50
-    #             item.quality = item.quality + 1
-    #           end
-    #         end
-    #         if item.sell_in < 6
-    #           if item.quality < 50
-    #             item.quality = item.quality + 1
-    #           end
-    #         end
-    #       end
-    #     end
-    #   end
-    #   if item.name != "Sulfuras, Hand of Ragnaros"
-    #     item.sell_in = item.sell_in - 1
-    #   end
-    #   if item.sell_in < 0
-    #     if item.name != "Aged Brie"
-    #       if item.name != "Backstage passes to a TAFKAL80ETC concert"
-    #         if item.quality > 0
-    #           if item.name != "Sulfuras, Hand of Ragnaros"
-    #             item.quality = item.quality - 1
-    #           end
-    #         end
-    #       else
-    #         item.quality = item.quality - item.quality
-    #       end
-    #     else
-    #       if item.quality < 50
-    #         item.quality = item.quality + 1
-    #       end
-    #     end
-    #   end
-    # end
-  # end
-
   private
     def update_average_item(item)
-      item.sell_in = item.sell_in - 1
+      reduce_item_sell_in(item)
       if item.quality > 0 && item.sell_in > 0
-        item.quality = item.quality - 1
+        reduce_item_quality(item, 1)
       elsif item.quality > 1 && item.sell_in < 0
-        item.quality = item.quality - 2
+        reduce_item_quality(item, 2)
       elsif item.quality == 1 && item.sell_in < 0
-        item.quality = item.quality - 1
+        reduce_item_quality(item, 1)
       else
         item.quality = item.quality
       end
@@ -84,25 +40,52 @@ class GildedRose
     end
 
     def update_aged_brie(item)
-      item.sell_in = item.sell_in - 1
+      reduce_item_sell_in(item)
       if item.quality < 50
-        item.quality = item.quality + 1
+        add_item_quality(item, 1)
       end
     end
 
     def update_backstage_pass(item)
-      item.sell_in = item.sell_in - 1
+      reduce_item_sell_in(item)
       if item.quality > 49
         item.quality = item.quality
       elsif item.sell_in < 0
-        item.quality = item.quality - item.quality
+        item.quality = 0
       elsif item.sell_in < 5
-        item.quality = item.quality + 3
+        add_item_quality(item, 3)
       elsif item.sell_in < 10
-        item.quality = item.quality + 2
+        add_item_quality(item, 2)
       else
-        item.quality = item.quality + 1
+        add_item_quality(item, 1)
       end
+    end
+
+    def update_conjured(item)
+      reduce_item_sell_in(item)
+      if item.quality > 1 && item.sell_in > 0
+        reduce_item_quality(item, 2)
+      elsif item.quality < 2 && item.sell_in > 0
+        item.quality = 0
+      elsif item.quality > 3 && item.sell_in < 0
+        reduce_item_quality(item, 4)
+      elsif item.quality < 4 && item.sell_in < 0
+        item.quality = 0
+      else
+        item.quality = item.quality
+      end
+    end
+
+    def reduce_item_sell_in(item)
+      item.sell_in = item.sell_in - 1
+    end
+
+    def add_item_quality(item, num)
+      item.quality = item.quality + (num)
+    end
+
+    def reduce_item_quality(item, num)
+      item.quality = item.quality - (num)
     end
 
 end
