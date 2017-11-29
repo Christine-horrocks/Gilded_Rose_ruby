@@ -41,7 +41,7 @@ Feel free to make any changes to the UpdateQuality method and add any new code a
 
 * Once I had introduced all of the new methods I commented out all of the original methods to check that all the tests passed.  
 
-* I ran the texttest_fixture to ensure that the output of my refactored code matched the original output. 
+* I ran the texttest_fixture to ensure that the output of my refactored code matched the original output.
 
 * I then added the a method which gave update_quality method the ability to fulfil the requirements for the new "conjured" items.
 
@@ -50,6 +50,13 @@ Feel free to make any changes to the UpdateQuality method and add any new code a
 * I looked at implementing stubs and mocks into the test, but ran out of time.
 
 * I would have also liked to have taken more time to refactor the if/else statements which are currently quite long and could be written more succinctly.
+
+## Texttest Updated Output 
+![Alt text](texttest_fixture_output_update.png?raw=true)
+
+
+## Example of Use
+![Alt text](running_code_irb.png?raw=true)
 
 ## Tech Stack
 
