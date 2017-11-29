@@ -27,7 +27,29 @@ Feel free to make any changes to the UpdateQuality method and add any new code a
 
 * I set up the project folder with spec and lib folders, as well as creating a Gemfile.
 
-*  
+* I reviewed the existing code to identify exactly what was happening in each section of the code and matched it to the descriptions in the challenge for clarification where necessary.
+
+* I printed out the textest_fixture output and saved it to a text file to use as a reference later.
+
+* I added test for each of the possible out comes of the original update_quality method and any specific outliers which could have caused issues. This also helped to cement the information provided in the challenge.
+
+* I ran the test and then reviewed how the code could be broken down in to separate method for each of the items on sale.
+
+* I wrote a method for each of the possible items. I then went back to the tests and worked out how these additional methods would break the tests if I added them to the original method without deleting any of the functionality.
+
+* Once I understood how each test should break in a controlled manor I introduced each of the new methods without deleting the old methods and checked that the tests failed in the way I had predicted.
+
+* Once I had introduced all of the new methods I commented out all of the original methods to check that all the tests passed.  
+
+* I ran the texttest_fixture to ensure that the output of my refactored code matched the original output. 
+
+* I then added the a method which gave update_quality method the ability to fulfil the requirements for the new "conjured" items.
+
+* I then went through and refactored the new methods by adding methods to DRY up the code.
+
+* I looked at implementing stubs and mocks into the test, but ran out of time.
+
+* I would have also liked to have taken more time to refactor the if/else statements which are currently quite long and could be written more succinctly.
 
 ## Tech Stack
 
